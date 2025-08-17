@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SARKARIjob - Your Government Job and Tools Portal</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts for "Inter" font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tesseract.js for Image to Text -->
+    <script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script>
+    <!-- jsPDF for Image to PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- PDF-Lib for PDF manipulation -->
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Hide all pages by default */
+        .page-content {
+            display: none;
+        }
+        /* Show the active page */
+        .page-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
+            <!-- Website Name -->
+            <div class="text-3xl font-bold tracking-tight">
+                <a href="#home" id="brand-logo" class="hover:text-gray-200 transition-colors">SARKARIjob</a>
+            </div>
+            <!-- Menu Navigation -->
+            <nav class="mt-4 md:mt-0">
+                <ul class="flex flex-wrap justify-center md:justify-end space-x-4 sm:space-x-6 md:space-x-8 text-lg font-medium">
+                    <li><a href="#home" class="page-link hover:text-yellow-300 transition-colors">Home</a></li>
+                    <li><a href="#about" class="page-link hover:text-yellow-300 transition-colors">About Us</a></li>
+                    <li><a href="#contact" class="page-link hover:text-yellow-300 transition-colors">Contact Us</a></li>
+                    <li><a href="#privacy" class="page-link hover:text-yellow-300 transition-colors">Privacy Policy</a></li>
+                    <li><a href="#disclaimer" class="page-link hover:text-yellow-300 transition-colors">Disclaimer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="container mx-auto px-4 py-8">
+
+        <!-- Home Page Content -->
+        <div id="home" class="page-content active">
+            <section class="bg-white p-6 md:p-10 rounded-xl shadow-lg mb-8">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-center text-blue-800 mb-6">Explore Our Tools</h1>
+                <p class="text-center text-lg text-gray-600 mb-8">A collection of useful, free tools to help you with your daily tasks.</p>
+
+                <!-- Tools Section -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                    <!-- Age Calculator Tool -->
+                    <a href="#age-calculator" class="tool-link block p-6 bg-blue-100 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-blue-500 text-white mb-4 shadow-lg group-hover:bg-blue-600 transition-colors">
+                                <i class="fas fa-birthday-cake text-2xl"></i>
+                            </div>
+                            <h2 class="text-lg font-semibold text-blue-800 group-hover:text-blue-900">Age Calculator</h2>
+                            <p class="text-sm text-gray-600 mt-1">Calculate your age precisely.</p>
+                        </div>
+                    </a>
+                    <!-- Photo Editor Tool -->
+                    <a href="#photo-editor" class="tool-link block p-6 bg-pink-100 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-pink-500 text-white mb-4 shadow-lg group-hover:bg-pink-600 transition-colors">
+                                <i class="fas fa-image text-2xl"></i>
+                            </div>
+                            <h2 class="text-lg font-semibold text-pink-800 group-hover:text-pink-900">Photo Editor</h2>
+                            <p class="text-sm text-gray-600 mt-1">Simple image editing tools.</p>
+                        </div>
+                    </a>
+                    <!-- PDF Editor Tool -->
+                    <a href="#pdf-editor" class="tool-link block p-6 bg-purple-100 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-purple-500 text-white mb-4 shadow-lg group-hover:bg-purple-600 transition-colors">
+                                <i class="fas fa-file-pdf text-2xl"></i>
+                            </div>
+                            <h2 class="text-lg font-semibold text-purple-800 group-hover:text-purple-900">PDF Editor</h2>
+                            <p class="text-sm text-gray-600 mt-1">Modify and manage your PDF files.</p>
+                        </div>
+                    </a>
+                    <!-- Image to Text Tool -->
+                    <a href="#image-to-text" class="tool-link block p-6 bg-yellow-100 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-yellow-500 text-white mb-4 shadow-lg group-hover:bg-yellow-600 transition-colors">
+                                <i class="fas fa-font text-2xl"></i>
+                            </div>
+                            <h2 class="text-lg font-semibold text-yellow-800 group-hover:text-yellow-900">Image to Text</h2>
+                            <p class="text-sm text-gray-600 mt-1">Extract text from your images.</p>
+                        </div>
+                    </a>
+                    <!-- Image to PDF Tool -->
+                    <a href="#image-to-pdf" class="tool-link block p-6 bg-teal-100 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-teal-500 text-white mb-4 shadow-lg group-hover:bg-teal-600 transition-colors">
+                                <i class="fas fa-file-image text-2xl"></i>
+                            </div>
+                            <h2 class="text-lg font-semibold text-teal-800 group-hover:text-teal-900">Image to PDF</h2>
+                            <p class="text-sm text-gray-600 mt-1">Convert your images into PDFs.</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 1000-word content about Sarkari Jobs -->
+            <section class="bg-white p-6 md:p-10 rounded-xl shadow-lg mt-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-center text-blue-800 mb-6">Your Guide to Sarkari Result & Government Jobs</h2>
+                <div class="prose max-w-none text-gray-700">
+                    <p>In the vast and competitive landscape of the Indian job market, the term 'Sarkari Job' or 'Government Job' holds a special place. It signifies not just a career, but a pathway to security, stability, and respect. For millions of aspirants, securing a government position is a lifelong dream, a goal pursued with immense dedication and hard work. The journey begins with preparing for competitive exams, but it culminates in the eagerly awaited moment of checking the 'Sarkari Result.' This article delves deep into the world of government jobs, the significance of the results, and how to navigate this crucial phase of your career.</p>
+                    <p>What exactly is a Sarkari Job, and why is it so coveted? Unlike private sector roles, government jobs are renowned for their job security, attractive salaries, and comprehensive benefits packages, including pensions, health insurance, and paid leave. The work-life balance is often better, and the social prestige associated with serving the public is an added bonus. Government jobs are available across various sectors, from central and state government ministries to public sector undertakings (PSUs), banks, railways, defense services, and many more. Each year, millions of vacancies are announced, creating a massive wave of opportunities for qualified candidates from all walks of life.</p>
+                    <p>The process of securing a government job is typically a multi-stage affair. It starts with the official notification, which details the number of vacancies, eligibility criteria, application dates, and the exam pattern. This is a critical first step, as aspirants must carefully read and understand the requirements before applying. The next stage is the examination itself, which can be an online or offline test, often followed by a physical test (for defense and police roles), an interview, or a combination of these. The complexity and format of the exam depend on the specific job and the recruiting agency.</p>
+                    <p>The most crucial moment for any aspirant is the declaration of the 'Sarkari Result.' This is the culmination of months, and sometimes years, of preparation. The term 'Sarkari Result' is a widely used phrase that refers to the official announcement of examination results by various government bodies like the UPSC, SSC, IBPS, and state-level commissions. These results are typically published on the official websites of the respective recruiting agencies. However, due to the sheer number of exams and the fragmented nature of these announcements, dedicated portals have emerged to aggregate this information, making it easier for candidates to find their results in one place.</p>
+                    <p>The significance of a Sarkari Result cannot be overstated. For a candidate, it is the moment of truth. A positive result signifies the beginning of a new chapter, a secured future, and the fulfillment of a long-held ambition. A negative result, while disheartening, is also an opportunity for introspection. It allows the candidate to identify areas of weakness and strategize for the next attempt. The journey of a government job aspirant is one of perseverance, resilience, and continuous learning. The result is just one milestone on this long road.</p>
+                    <p>Navigating the world of government job announcements and results can be challenging. The sheer volume of information, combined with the constant updates and changes in exam patterns, can be overwhelming. This is where a reliable platform becomes indispensable. A good portal should not only provide the latest Sarkari Result but also offer detailed information on upcoming vacancies, admit card downloads, answer keys, and previous year's question papers. It should be a one-stop solution for all government job-related needs, helping candidates stay informed and prepared.</p>
+                    <p>Platforms dedicated to government jobs often serve as a community hub. Aspirants can share study materials, discuss exam strategies, and find support from peers who are on a similar journey. This sense of community is vital, as it helps alleviate the stress and pressure associated with competitive exams. The right platform can provide curated content, expert analysis, and timely notifications, ensuring that no opportunity is missed. It acts as a digital companion, guiding aspirants through every step of their journey, from the initial application to the final selection.</p>
+                    <p>The digital age has revolutionized the way we access information, and the government job sector is no exception. With the rise of online platforms, aspiring candidates no longer have to rely on physical newspapers or bulletin boards. Everything from job notifications to exam results is now available at their fingertips. This accessibility has leveled the playing field, giving candidates from remote areas the same opportunities as those in urban centers. It has democratized the process, making it more transparent and efficient. However, with this convenience comes the responsibility to verify information from official sources to avoid misinformation.</p>
+                    <p>In conclusion, the pursuit of a Sarkari Job is a marathon, not a sprint. It requires patience, hard work, and a strategic approach. The Sarkari Result is a moment of reckoning, but it is not the end of the road. Whether you succeed or fail, each attempt is a valuable learning experience. By leveraging the right resources and staying committed to your goals, you can significantly increase your chances of securing a coveted government position. The dream of a secure and respected career is within reach, and with the right guidance, you can turn that dream into a reality. Good luck on your journey towards a rewarding government job.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Age Calculator Page -->
+        <div id="age-calculator" class="page-content">
+            <section class="bg-white p-6 md:p-10 rounded-xl shadow-lg mb-8">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-center text-blue-800 mb-6">Age Calculator</h1>
+                <p class="text-center text-lg text-gray-600 mb-8">Find your exact age in years, months, and days.</p>
+                
+                <!-- Age Calculator Tool -->
+                <div class="max-w-md mx-auto bg-gray-100 p-6 rounded-lg shadow-md mb-8">
+                    <div class="mb-4">
+                        <label for="dob" class="block text-gray-700 font-semibold mb-2">Enter your date of birth:</label>
+                        <input type="date" id="dob" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <button id="calculate-btn" class="w-full bg-blue-600 text-white font-bold py-3 rounded-md hover:bg-blue-700 transition-colors">Calculate Age</button>
+                    <div id="result" class="mt-6 text-center text-lg font-semibold text-gray-800"></div>
+                </div>
+
+                <!-- 500-word content about the tool -->
+                <div class="prose max-w-none text-gray-700">
+                    <p>Our online Age Calculator is a simple yet powerful tool designed to help you determine your exact age. Whether you're curious about how old you are in years, months, and days, or you need to find the age difference between two dates, this tool provides a quick and accurate solution. The process is straightforward, requiring only your date of birth to give you a precise breakdown of your age. This tool is perfect for various applications, from filling out official forms that require your exact age to simply satisfying your own curiosity.</p>
+                    <p>To use the Age Calculator, all you need to do is enter your birth date into the designated input field. The tool will then process this information and provide a detailed result. It calculates not only the number of years you have completed but also the number of months and days that have passed since your last birthday. This level of detail can be surprisingly useful. For instance, you might find out that you are 30 years, 5 months, and 12 days old, which is a far more specific and interesting piece of information than just knowing you are 30. The tool is designed to be user-friendly, with a clean interface that makes it easy for anyone to use, regardless of their technical expertise.</p>
+                    <p>The algorithm behind the Age Calculator is based on the difference between the current date and the date you enter. It accounts for leap years and the varying number of days in each month to ensure the calculation is completely accurate. This precision is what makes the tool reliable for legal, educational, or personal use. You no longer have to manually count days on a calendar or perform complex calculations. Our tool does all the heavy lifting for you, providing an instant result that you can trust. It's a fantastic resource for students, professionals, and anyone who needs to quickly determine an age.</p>
+                    <p>Beyond simply calculating your age, this tool can also be used to find out the age of someone else, or even to determine the exact duration between any two dates. For example, you can calculate the number of days you've been at your current job, or the time that has passed since a significant event. The versatility of the Age Calculator makes it more than just a novelty; it's a genuinely useful utility. It helps you keep track of time in a meaningful way, giving you a new perspective on the duration of events in your life.</p>
+                    <p>In summary, our Age Calculator tool is a must-have for anyone who needs to quickly and accurately calculate age or date differences. Its simplicity, accuracy, and versatility make it an invaluable resource. The tool is designed with a focus on a seamless user experience, ensuring that you can get the information you need with minimal effort. We encourage you to try it out and see how easy it is to use. This tool is just one example of our commitment to providing simple, effective solutions for your everyday needs.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Photo Editor Page -->
+        <div id="photo-editor" class="page-content">
+            <section class="bg-white p-6 md:p-10 rounded-xl shadow-lg mt-8">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-center text-blue-800 mb-6">Online Photo Editor</h1>
+                <p class="text-center text-lg text-gray-600 mb-8">Edit your images with our free online tool.</p>
+                <!-- Photo Editor Tool UI -->
+                <div class="flex flex-col items-center max-w-3xl mx-auto p-6 rounded-lg shadow-md mb-8">
+                    <div class="w-full flex flex-col md:flex-row md:space-x-4 mb-4">
+                        <label class="block mb-2 md:mb-0 w-full md:w-1/2">
+                            <span class="text-gray-700 font-semibold">Upload Image:</span>
+                            <input type="file" id="image-upload" accept="image/*" class="mt-1 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer">
+                        </label>
+                        <div class="w-full md:w-1/2">
+                            <span class="text-gray-700 font-semibold block mb-2">Adjustments:</span>
+                            <div class="flex items-center space-x-2">
+                                <label for="brightness-slider" class="text-sm">Brightness</label>
+                                <input type="range" id="brightness-slider" min="0" max="200" value="100" class="flex-grow">
+                            </div>
+                            <div class="flex items-center space-x-2 mt-2">
+                                <label for="contrast-slider" class="text-sm">Contrast</label>
+                                <input type="range" id="contrast-slider" min="0" max="200" value="100" class="flex-grow">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full flex justify-center space-x-2 mb-4">
+                         <button id="grayscale-btn" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition-colors text-sm">Grayscale</button>
+                         <button id="sepia-btn" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition-colors text-sm">Sepia</button>
+                         <button id="invert-btn" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition-colors text-sm">Invert</button>
+                         <button id="reset-btn" class="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors text-sm">Reset</button>
+                    </div>
+
+                    <canvas id="image-canvas" class="rounded-lg shadow-xl border-4 border-gray-200" style="max-width: 100%; height: auto; display: none;"></canvas>
+                    <button id="download-image-btn" class="mt-4 bg-green-600 text-white font-bold py-2 px-6 rounded-md hover:bg-green-700 transition-colors" style="display: none;">Download Image</button>
+                    <p id="image-status" class="mt-4 text-center text-sm text-gray-500"></p>
+                </div>
+                <!-- 500-word content about the tool -->
+                <div class="prose max-w-none text-gray-700">
+                    <p>Our online Photo Editor is designed to be a simple and accessible tool for all your basic image editing needs. You don't need to be a professional photographer or graphic designer to enhance your pictures. This tool provides a clean, intuitive interface that allows you to quickly crop, resize, and apply basic filters to your images. Whether you want to prepare a photo for social media, a website, or a simple document, our editor has the essential functions you'll need. It works directly in your browser, which means there's no software to download or install, making it incredibly convenient for quick edits on the go.</p>
+                    <p>The process of using the Photo Editor is very straightforward. First, you'll upload your image from your device. Once the image is loaded, a set of easy-to-use controls will appear. You can start with basic adjustments like brightness and contrast to make your photo pop. Need to change the dimensions? The resize function lets you input custom width and height values, or you can use preset options. Cropping is also a breeze; simply drag the corners of the cropping box to select the area you want to keep. This is particularly useful for removing unwanted backgrounds or focusing on a specific part of the image. The tool is built to be fast and responsive, ensuring a smooth editing experience without any lag.</p>
+                    <p>One of the most popular features of a basic photo editor is the ability to add filters. Our tool will include a variety of filters to give your photos a unique look and feel. You'll be able to choose from options like black and white, sepia, vintage, and more, instantly transforming the mood of your image with a single click. The tool will also have options to rotate or flip your image, which is handy for correcting orientation issues. All changes are shown in real-time, so you can see the effect of your edits as you make them. Once you are satisfied with the result, you can save the edited image to your device in a common format like JPG or PNG.</p>
+                    <p>The convenience of having an online photo editor cannot be overstated. It eliminates the need for expensive and complex software. You can access the tool from any device with an internet connection, whether it's a desktop computer, a laptop, or even a tablet. This accessibility makes it a great resource for students, bloggers, small business owners, and anyone who needs to make quick edits without the hassle. The tool is designed to handle common image file types, ensuring broad compatibility. We are committed to making our tools as user-friendly as possible, and the photo editor is a testament to that goal.</p>
+                    <p>In conclusion, our online Photo Editor is a powerful yet easy-to-use tool that provides all the essential functions for enhancing your images. Its simple interface, quick processing, and browser-based nature make it the perfect solution for anyone who needs to make fast, effective edits without the complexity of professional software. We believe that everyone should have access to simple editing tools, and this editor is our way of providing that. We hope you find it to be a valuable addition to your digital toolkit.</p>
+                </div>
+            </section>
+        </div>
+
+        <div id="pdf-editor" class="page-content">
+            <section class="bg-white p-6 md:p-10 rounded-xl shadow-lg mt-8">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-center text-blue-800 mb-6">Online PDF Editor</h1>
+                <p class="text-center text-lg text-gray-600 mb-8">Modify your PDF documents with ease.</p>
+                <!-- PDF Editor Tool UI -->
+                <div class="max-w-xl mx-auto p-6 rounded-lg shadow-md mb-8">
+                    <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+                        <div class="w-full md:w-1/2">
+                            <label for="pdf-merge-input" class="block text-gray-700 font-semibold mb-2">Merge PDFs:</label>
+                            <input type="file" id="pdf-merge-input" multiple accept="application/pdf" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer">
+                            <button id="merge-pdf-btn" class="mt-4 w-full bg-blue-600 text-white font-bold py-2 px-6 rounded-md hover:bg-blue-700 transition-colors">Merge PDFs</button>
+                        </div>
+                        <div class="w-full md:w-1/2">
+                            <label for="pdf-split-input" class="block text-gray-700 font-semibold mb-2">Split a PDF:</label>
+                            <input type="file" id="pdf-split-input" accept="application/pdf" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 cursor-pointer">
+                            <input type="text" id="split-pages-input" placeholder="e.g., 1-3, 5, 8-10" class="mt-2 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+                            <button id="split-pdf-btn" class="mt-4 w-full bg-purple-600 text-white font-bold py-2 px-6 rounded-md hover:bg-purple-700 transition-colors">Split PDF</button>
+                        </div>
+                    </div>
+                    <div id="pdf-status" class="mt-6 text-center text-sm text-gray-500"></div>
+                </div>
+                <!-- 500-word content about the tool -->
+                <div class="prose max-w-none text-gray-700">
+                    <p>Navigating PDF documents can be a challenge without the right tools. Our online PDF Editor is a solution designed to simplify the process of managing and modifying your PDF files. This tool will allow you to perform a variety of common tasks, such as merging multiple PDFs into one, splitting a single PDF into several files, and reordering pages. Whether you're a student compiling research papers or a professional combining reports, this editor will streamline your workflow. Since it is a web-based tool, you can access it from any computer or device with an internet connection, eliminating the need for expensive software licenses.</p>
+                    <p>The process of using our PDF Editor is intuitive and efficient. To start, you will simply upload your PDF document. The tool will then display a user-friendly interface with options to manipulate your file. For instance, if you need to combine several documents, you can upload them all and use the merge function. The editor will combine them in the order you specify, creating a single, cohesive file. Alternatively, if you have a large document and only need a few pages, the split feature will let you extract specific pages into a new PDF. The tool is designed to process these requests quickly, so you won't have to wait long for your new document to be ready.</p>
+                    <p>Beyond merging and splitting, a good PDF editor should offer more granular control. Our tool will also feature options to rotate pages that were scanned incorrectly, delete unwanted pages, and even add new pages. This level of control is essential for creating polished, professional documents. Imagine you have a document with a few blank pages or an extra cover page; you can simply select and remove them. Or perhaps you need to insert a page from another PDF into your current one; the reorder feature would allow you to do this easily. All these functions are built with a focus on ease of use, ensuring that even a novice can navigate the interface without any trouble.</p>
+                    <p>The utility of an online PDF editor extends to many aspects of both personal and professional life. It can be used for academic purposes, like preparing a thesis or a project report. In the professional world, it can help you manage contracts, invoices, and presentations. The fact that it is a free, web-based tool is a significant advantage. You no longer have to purchase expensive software suites just to make a few simple edits to a PDF. Our tool provides a powerful, accessible alternative that saves you time and money. We believe in providing essential utilities to everyone, and this PDF editor is a perfect example of that philosophy.</p>
+                    <p>To conclude, our online PDF Editor is a comprehensive yet easy-to-use tool for all your PDF management needs. It offers a wide range of functions from merging and splitting to reordering and deleting pages, all within a simple, clean interface. By making these essential functions available for free, we aim to empower users to manage their documents more effectively. This tool is designed to be a reliable resource for students, professionals, and anyone who deals with PDFs on a regular basis. Try it out and see how it can simplify your document-related tasks.</p>
+                </div>
+            </section>
+        </div>
+
+        <div id="image-to-text" class="page-content">
+            <section class="bg-white p-6 md:p-10 rounded-xl shadow-lg mt-8">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-center text-blue-800 mb-6">Image to Text Converter</h1>
+                <p class="text-center text-lg text-gray-600 mb-8">Extract text from images using advanced OCR technology.</p>
+                <!-- Image to Text Tool UI -->
+                <div class="max-w-xl mx-auto p-6 rounded-lg shadow-md mb-8">
+                    <label for="ocr-image-input" class="block text-gray-700 font-semibold mb-2">Upload Image:</label>
+                    <input type="file" id="ocr-image-input" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-yellow-50 file:text-yellow-700 hover:file:bg-yellow-100 cursor-pointer">
+                    <button id="convert-to-text-btn" class="mt-4 w-full bg-yellow-600 text-white font-bold py-2 px-6 rounded-md hover:bg-yellow-700 transition-colors">Extract Text</button>
+                    <div id="ocr-status" class="mt-4 text-center text-sm text-gray-500"></div>
+                    <div class="mt-6">
+                        <label for="extracted-text-output" class="block text-gray-700 font-semibold mb-2">Extracted Text:</label>
+                        <textarea id="extracted-text-output" rows="10" class="w-full p-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-50 text-gray-800"></textarea>
+                    </div>
+                </div>
+                <!-- 500-word content about the tool -->
+                <div class="prose max-w-none text-gray-700">
+                    <p>Our online Image to Text Converter is a sophisticated tool that uses Optical Character Recognition (OCR) technology to extract text from images. This powerful utility is incredibly useful for a variety of purposes. Imagine you have a scanned document, a screenshot of an article, or a photograph of a whiteboard with important notes. Instead of manually typing out all the text, which is a time-consuming and error-prone process, you can simply upload the image and let our tool do the work for you. It converts the visual data into editable, searchable text in a matter of seconds, saving you a significant amount of time and effort.</p>
+                    <p>The process is as simple as it gets. You'll begin by uploading your image file. Our tool will support common image formats such as JPEG, PNG, and GIF. Once the image is uploaded, the OCR engine will analyze it, identify the characters, and convert them into text. The quality of the conversion will depend on the clarity and resolution of the original image, so for best results, it's recommended to use clear, high-quality images. The extracted text will then be displayed in a text box, where you can easily copy it to your clipboard. This makes it simple to transfer the text into a document, an email, or any other application you're working with.</p>
+                    <p>One of the key advantages of this tool is its accuracy. Modern OCR technology has become highly advanced, capable of recognizing a wide range of fonts and text styles. While it may not be perfect with very poor-quality images or handwritten text, it performs exceptionally well with clear, printed text. This makes it a great resource for digitizing printed books, magazine articles, and official documents. Students can use it to quickly grab notes from a presentation slide, and professionals can use it to digitize data from printed forms. The possibilities are endless, and the convenience it offers is unmatched by manual typing.</p>
+                    <p>The utility of an Image to Text converter extends beyond basic data entry. It can also be a valuable accessibility tool, helping individuals with visual impairments to access information in images. The extracted text can be read aloud by screen readers, making the content accessible to a wider audience. Furthermore, it can be a great time-saver for researchers and journalists who need to quickly pull quotes or data from visual sources. The tool is designed to be free and accessible to everyone, ensuring that these powerful capabilities are not locked behind a paywall.</p>
+                    <p>In conclusion, our online Image to Text Converter is a must-have tool for anyone who needs to quickly and accurately extract text from images. Powered by advanced OCR technology, it offers a simple, efficient, and reliable solution for digitizing information. Its ease of use and broad applicability make it a valuable resource for students, professionals, and anyone in need of a quick text extraction solution. We are proud to offer this tool as part of our suite of free utilities, and we hope it helps you save time and be more productive in your daily tasks.</p>
+                </div>
+            </section>
+        </div>
+
+        <div id="image-to-pdf" class="page-content">
+            <section class="bg-white p-6 md:p-10 rounded-xl shadow-lg mt-8">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-center text-blue-800 mb-6">Image to PDF Converter</h1>
+                <p class="text-center text-lg text-gray-600 mb-8">Convert images into a single PDF document.</p>
+                <!-- Image to PDF Tool UI -->
+                <div class="max-w-xl mx-auto p-6 rounded-lg shadow-md mb-8">
+                    <label for="pdf-image-input" class="block text-gray-700 font-semibold mb-2">Upload Images:</label>
+                    <input type="file" id="pdf-image-input" multiple accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 cursor-pointer">
+                    <button id="convert-to-pdf-btn" class="mt-4 w-full bg-teal-600 text-white font-bold py-2 px-6 rounded-md hover:bg-teal-700 transition-colors">Convert to PDF</button>
+                    <div id="pdf-image-status" class="mt-4 text-center text-sm text-gray-500"></div>
+                </div>
+                <!-- 500-word content about the tool -->
+                <div class="prose max-w-none text-gray-700">
+                    <p>Creating a PDF from a collection of images is a common requirement for students and professionals alike. Our online Image to PDF Converter is a simple and effective tool designed to do just that. Whether you have multiple photos of a document, a set of project diagrams, or a series of charts, this tool allows you to combine them into a single, professional-looking PDF file. This is particularly useful for submitting assignments, creating portfolios, or archiving important visual information in a single, easily shareable document. The converter works directly in your web browser, so you can access it from anywhere without needing to install any software.</p>
+                    <p>Using the tool is a seamless process. You will start by selecting and uploading the images you wish to convert. Our tool will support popular image formats such as JPG, PNG, and BMP. You will then have the option to arrange the images in the desired order, ensuring that they appear in the correct sequence within the final PDF. Once the images are in place and the settings are configured to your liking, you will simply click a button to initiate the conversion. The tool will process your images and generate a single PDF file that you can then download to your device. The entire process is designed to be fast and hassle-free, saving you valuable time.</p>
+                    <p>The PDF format is widely used and accepted for its reliability and consistent formatting across different devices and operating systems. By converting your images to a PDF, you ensure that your document will look exactly as you intended, regardless of who views it or what device they use. This is a significant advantage over sharing a folder of individual image files, which can be cumbersome and disorganized. Our tool also ensures that the quality of your images is maintained during the conversion process, so you don't have to worry about pixelation or loss of detail in the final PDF. It is the perfect solution for digitizing photo albums, creating visual presentations, or consolidating scanned papers.</p>
+                    <p>The utility of an Image to PDF converter is undeniable. Students can use it to turn their handwritten notes (photographed with a phone) into a single, organized study guide. Professionals can use it to compile charts and graphs into a single report for presentations. It is also an excellent tool for personal use, such as creating a digital scrapbook or an organized file of family photos. By offering this tool for free, we aim to make these capabilities accessible to everyone. The simple interface and powerful functionality make it a go-to resource for anyone who needs to manage visual and document data effectively.</p>
+                    <p>In conclusion, our online Image to PDF Converter is a highly practical and easy-to-use tool. It provides a straightforward way to combine multiple images into a single, high-quality PDF document. Its efficiency and reliability make it an ideal choice for both personal and professional use. We are confident that this tool will become an essential part of your digital toolkit, helping you to organize and share your visual information more effectively. We hope you find it to be a valuable and reliable resource.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- About Us Page -->
+        <div id="about" class="page-content">
+            <section class="bg-white p-6 md:p-10 rounded-xl shadow-lg mt-8">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-center text-blue-800 mb-6">About SARKARIjob</h1>
+                <div class="prose max-w-none text-gray-700">
+                    <p>Welcome to SARKARIjob, your one-stop destination for all things related to government jobs and useful online tools. Our mission is to simplify the complex journey of preparing for and securing a government job by providing timely information, reliable resources, and a suite of free online tools to assist you in your everyday tasks. We understand the value of a 'Sarkari Job' in India—it represents not just a career, but a promise of security, respect, and a stable future. Our platform is built on the belief that every aspirant deserves a fair chance and access to the best resources.</p>
+                    <p>Our team is dedicated to curating the latest and most accurate information about government job notifications, admit cards, exam results, and answer keys from various central and state government bodies. We aim to be a trustworthy source that cuts through the noise and provides you with the most relevant updates. Beyond job-related information, we are also committed to empowering you with practical, easy-to-use tools. Our collection of free online utilities, from the Age Calculator to the PDF Editor, is designed to help you with common digital tasks, making your daily life more efficient. At SARKARIjob, we are more than just a job portal; we are a partner in your journey towards success.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Contact Us Page -->
+        <div id="contact" class="page-content">
+            <section class="bg-white p-6 md:p-10 rounded-xl shadow-lg mt-8">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-center text-blue-800 mb-6">Contact Us</h1>
+                <div class="prose max-w-none text-gray-700">
+                    <p>We value your feedback and are always here to help. If you have any questions, suggestions, or concerns regarding our website, the content, or our tools, please don't hesitate to reach out. We are committed to providing the best possible experience for our users and your input is essential to our growth.</p>
+                    <p><strong>Email:</strong> support@sarkarijob.com</p>
+                    <p>We do our best to respond to all inquiries as quickly as possible. Please allow for a reasonable response time. Thank you for being a part of the SARKARIjob community!</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Privacy Policy Page -->
+        <div id="privacy" class="page-content">
+            <section class="bg-white p-6 md:p-10 rounded-xl shadow-lg mt-8">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-center text-blue-800 mb-6">Privacy Policy</h1>
+                <div class="prose max-w-none text-gray-700">
+                    <p>Your privacy is important to us. This Privacy Policy outlines the types of information we collect, how we use it, and the steps we take to protect your data. We are committed to being transparent about our practices.</p>
+                    <p><strong>Information We Collect:</strong> We do not collect any personally identifiable information from you when you use our website or our tools. Our tools, such as the Age Calculator, process data on your browser and do not send any information to our servers. Any data you input remains on your device.</p>
+                    <p><strong>How We Use Your Information:</strong> Since we do not collect any personal information, we do not use, share, or sell your data. We respect your right to privacy and ensure that your use of our services is completely anonymous.</p>
+                    <p><strong>Cookies:</strong> We may use basic cookies to enhance your browsing experience and remember your preferences, such as your last visited page. These cookies are not used to track your personal information or browsing history outside of our website.</p>
+                    <p><strong>Third-Party Links:</strong> Our website may contain links to other websites. We are not responsible for the privacy practices or content of these third-party sites. We encourage you to read the privacy policies of any external sites you visit.</p>
+                    <p><strong>Policy Changes:</strong> We may update this Privacy Policy from time to time. Any changes will be posted on this page. We encourage you to review this policy periodically to stay informed about how we are protecting your information.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Disclaimer Page -->
+        <div id="disclaimer" class="page-content">
+            <section class="bg-white p-6 md:p-10 rounded-xl shadow-lg mt-8">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-center text-blue-800 mb-6">Disclaimer</h1>
+                <div class="prose max-w-none text-gray-700">
+                    <p>The information provided on SARKARIjob is for general informational purposes only. While we strive to provide accurate and up-to-date information, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability of the information contained on the website. Any reliance you place on such information is therefore strictly at your own risk.</p>
+                    <p>The tools provided on this website are for general use and are not a substitute for professional advice. The Age Calculator, for example, is for recreational and general use only. For official or legal purposes, we recommend consulting official sources or a professional. We are not responsible for any errors or omissions, or for the results obtained from the use of this information and these tools.</p>
+                    <p>SARKARIjob may contain links to external websites that are not provided or maintained by or in any way affiliated with us. Please note that we do not guarantee the accuracy, relevance, timeliness, or completeness of any information on these external websites. The inclusion of any links does not necessarily imply a recommendation or endorse the views expressed within them.</p>
+                    <p>By using our website, you hereby consent to our disclaimer and agree to its terms.</p>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-6 mt-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm">&copy; 2024 SARKARIjob. All Rights Reserved.</p>
+            <div class="mt-2 text-sm space-x-4">
+                <a href="#about" class="page-link hover:text-gray-300 transition-colors">About</a>
+                <a href="#contact" class="page-link hover:text-gray-300 transition-colors">Contact</a>
+                <a href="#privacy" class="page-link hover:text-gray-300 transition-colors">Privacy</a>
+                <a href="#disclaimer" class="page-link hover:text-gray-300 transition-colors">Disclaimer</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript to handle navigation and tool functionality
+        
+        // Function to show a specific page and hide all others
+        function showPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0); // Scroll to the top of the page
+        }
+
+        // Add event listeners to all navigation links and tool links
+        document.querySelectorAll('.page-link, .tool-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Prevent default link behavior
+                e.preventDefault();
+
+                // Get the target page ID from the href attribute
+                const targetId = this.getAttribute('href').substring(1);
+                showPage(targetId);
+            });
+        });
+
+        // Initialize the page based on the URL hash, default to 'home'
+        window.addEventListener('load', function() {
+            const initialPage = window.location.hash.substring(1) || 'home';
+            showPage(initialPage);
+        });
+
+        // Event listener for the Age Calculator tool
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            const dobInput = document.getElementById('dob').value;
+            const resultDiv = document.getElementById('result');
+
+            // Clear previous result
+            resultDiv.textContent = '';
+            
+            if (!dobInput) {
+                resultDiv.textContent = 'Please enter a valid date of birth.';
+                resultDiv.classList.add('text-red-600');
+                resultDiv.classList.remove('text-blue-800');
+                return;
+            }
+
+            const birthDate = new Date(dobInput);
+            const today = new Date();
+
+            // Check for invalid date
+            if (isNaN(birthDate.getTime())) {
+                resultDiv.textContent = 'Invalid date. Please use YYYY-MM-DD format.';
+                resultDiv.classList.add('text-red-600');
+                resultDiv.classList.remove('text-blue-800');
+                return;
+            }
+
+            let years = today.getFullYear() - birthDate.getFullYear();
+            let months = today.getMonth() - birthDate.getMonth();
+            let days = today.getDate() - birthDate.getDate();
+
+            // Adjust for months and days
+            // If the current day is before the birth day,
+            // subtract one month and add the days from the previous month.
+            if (days < 0) {
+                months--;
+                // Get the number of days in the previous month
+                const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+                days += lastMonth.getDate();
+            }
+
+            // If the current month is before the birth month,
+            // or if it's the same month but the birthday hasn't happened yet,
+            // subtract one year and add 12 months.
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+            
+            resultDiv.textContent = `Your age is ${years} years, ${months} months, and ${days} days.`;
+            resultDiv.classList.add('text-blue-800');
+            resultDiv.classList.remove('text-red-600');
+        });
+
+        // --- Photo Editor Tool Logic ---
+        const imageUpload = document.getElementById('image-upload');
+        const imageCanvas = document.getElementById('image-canvas');
+        const ctx = imageCanvas.getContext('2d');
+        const brightnessSlider = document.getElementById('brightness-slider');
+        const contrastSlider = document.getElementById('contrast-slider');
+        const grayscaleBtn = document.getElementById('grayscale-btn');
+        const sepiaBtn = document.getElementById('sepia-btn');
+        const invertBtn = document.getElementById('invert-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const downloadImageBtn = document.getElementById('download-image-btn');
+        const imageStatus = document.getElementById('image-status');
+
+        let originalImage = null; // Store the original image for resetting
+        let imgData = null; // Store the current image data
+
+        imageUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        originalImage = img;
+                        imageCanvas.width = img.width;
+                        imageCanvas.height = img.height;
+                        ctx.drawImage(img, 0, 0);
+                        imgData = ctx.getImageData(0, 0, imageCanvas.width, imageCanvas.height);
+                        imageCanvas.style.display = 'block';
+                        downloadImageBtn.style.display = 'block';
+                        imageStatus.textContent = '';
+                        brightnessSlider.value = 100;
+                        contrastSlider.value = 100;
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Function to apply adjustments (brightness, contrast)
+        function applyAdjustments() {
+            if (!originalImage) {
+                imageStatus.textContent = "Please upload an image first.";
+                return;
+            }
+
+            // Reset to original image data
+            ctx.drawImage(originalImage, 0, 0);
+            let tempImgData = ctx.getImageData(0, 0, imageCanvas.width, imageCanvas.height);
+            let pixels = tempImgData.data;
+
+            const brightnessFactor = (brightnessSlider.value - 100) / 100 * 255;
+            const contrastFactor = (contrastSlider.value - 100) / 100;
+            const intercept = 128 + (128 * contrastFactor);
+            const scale = Math.tan((contrastFactor + 1) * Math.PI/4);
+            const r_sum = 0, g_sum = 0, b_sum = 0;
+
+            for (let i = 0; i < pixels.length; i += 4) {
+                let r = pixels[i];
+                let g = pixels[i + 1];
+                let b = pixels[i + 2];
+
+                // Apply Brightness
+                r += brightnessFactor;
+                g += brightnessFactor;
+                b += brightnessFactor;
+
+                // Apply Contrast
+                r = Math.floor(scale * (r - intercept) + intercept);
+                g = Math.floor(scale * (g - intercept) + intercept);
+                b = Math.floor(scale * (b - intercept) + intercept);
+                
+                pixels[i] = r;
+                pixels[i + 1] = g;
+                pixels[i + 2] = b;
+            }
+            ctx.putImageData(tempImgData, 0, 0);
+            imgData = tempImgData; // Store the updated image data
+        }
+        brightnessSlider.addEventListener('input', applyAdjustments);
+        contrastSlider.addEventListener('input', applyAdjustments);
+
+        // Function to apply filters
+        function applyFilter(filter) {
+             if (!imgData) {
+                imageStatus.textContent = "Please upload an image first.";
+                return;
+            }
+            // Get a fresh copy of the data from the canvas before applying a filter
+            const newImageData = ctx.getImageData(0, 0, imageCanvas.width, imageCanvas.height);
+            const pixels = newImageData.data;
+
+            for (let i = 0; i < pixels.length; i += 4) {
+                let r = pixels[i];
+                let g = pixels[i + 1];
+                let b = pixels[i + 2];
+
+                switch (filter) {
+                    case 'grayscale':
+                        let avg = (r + g + b) / 3;
+                        pixels[i] = avg;
+                        pixels[i + 1] = avg;
+                        pixels[i + 2] = avg;
+                        break;
+                    case 'sepia':
+                        pixels[i] = (r * 0.393) + (g * 0.769) + (b * 0.189);
+                        pixels[i + 1] = (r * 0.349) + (g * 0.686) + (b * 0.168);
+                        pixels[i + 2] = (r * 0.272) + (g * 0.534) + (b * 0.131);
+                        break;
+                    case 'invert':
+                        pixels[i] = 255 - r;
+                        pixels[i + 1] = 255 - g;
+                        pixels[i + 2] = 255 - b;
+                        break;
+                }
+            }
+            ctx.putImageData(newImageData, 0, 0);
+            imgData = newImageData; // Store the new image data
+        }
+        grayscaleBtn.addEventListener('click', () => applyFilter('grayscale'));
+        sepiaBtn.addEventListener('click', () => applyFilter('sepia'));
+        invertBtn.addEventListener('click', () => applyFilter('invert'));
+
+        // Reset button logic
+        resetBtn.addEventListener('click', () => {
+            if (originalImage) {
+                ctx.drawImage(originalImage, 0, 0);
+                imgData = ctx.getImageData(0, 0, imageCanvas.width, imageCanvas.height);
+                brightnessSlider.value = 100;
+                contrastSlider.value = 100;
+                imageStatus.textContent = 'Image reset.';
+            } else {
+                imageStatus.textContent = 'No image to reset.';
+            }
+        });
+
+        // Download button logic
+        downloadImageBtn.addEventListener('click', () => {
+            if (imgData) {
+                const link = document.createElement('a');
+                link.download = 'edited_image.png';
+                link.href = imageCanvas.toDataURL('image/png');
+                link.click();
+            } else {
+                imageStatus.textContent = "No image to download.";
+            }
+        });
+
+        // --- PDF Editor Tool Logic ---
+        const { PDFDocument, rgb } = window.PDFLib;
+        const pdfMergeInput = document.getElementById('pdf-merge-input');
+        const mergePdfBtn = document.getElementById('merge-pdf-btn');
+        const pdfSplitInput = document.getElementById('pdf-split-input');
+        const splitPagesInput = document.getElementById('split-pages-input');
+        const splitPdfBtn = document.getElementById('split-pdf-btn');
+        const pdfStatus = document.getElementById('pdf-status');
+
+        // Function to merge PDFs
+        mergePdfBtn.addEventListener('click', async () => {
+            const files = pdfMergeInput.files;
+            if (files.length < 2) {
+                pdfStatus.textContent = 'Please select at least two PDF files to merge.';
+                return;
+            }
+
+            pdfStatus.textContent = 'Merging PDFs...';
+            
+            try {
+                const mergedPdf = await PDFDocument.create();
+                for (const file of files) {
+                    const arrayBuffer = await file.arrayBuffer();
+                    const pdf = await PDFDocument.load(arrayBuffer);
+                    const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+                    copiedPages.forEach((page) => mergedPdf.addPage(page));
+                }
+                const mergedPdfBytes = await mergedPdf.save();
+                const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'merged.pdf';
+                link.click();
+                URL.revokeObjectURL(url);
+                pdfStatus.textContent = 'PDFs merged successfully! Download started.';
+            } catch (error) {
+                pdfStatus.textContent = `Error merging PDFs: ${error.message}`;
+                console.error(error);
+            }
+        });
+
+        // Function to split a PDF
+        splitPdfBtn.addEventListener('click', async () => {
+            const files = pdfSplitInput.files;
+            const pagesToSplit = splitPagesInput.value.trim();
+
+            if (files.length === 0 || !pagesToSplit) {
+                pdfStatus.textContent = 'Please select a PDF and enter page numbers to split.';
+                return;
+            }
+
+            pdfStatus.textContent = 'Splitting PDF...';
+            
+            try {
+                const file = files[0];
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await PDFDocument.load(arrayBuffer);
+
+                const pageRanges = parsePageRanges(pagesToSplit, pdf.getPageCount());
+
+                for (let i = 0; i < pageRanges.length; i++) {
+                    const newPdf = await PDFDocument.create();
+                    const copiedPages = await newPdf.copyPages(pdf, pageRanges[i]);
+                    copiedPages.forEach((page) => newPdf.addPage(page));
+
+                    const newPdfBytes = await newPdf.save();
+                    const blob = new Blob([newPdfBytes], { type: 'application/pdf' });
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = `split-part-${i + 1}.pdf`;
+                    link.click();
+                    URL.revokeObjectURL(url);
+                }
+                pdfStatus.textContent = 'PDF split successfully! Downloads started.';
+            } catch (error) {
+                pdfStatus.textContent = `Error splitting PDF: ${error.message}`;
+                console.error(error);
+            }
+        });
+
+        // Helper function to parse page ranges (e.g., "1-3, 5, 8-10")
+        function parsePageRanges(input, totalPages) {
+            const ranges = [];
+            const parts = input.split(',').map(part => part.trim());
+
+            parts.forEach(part => {
+                if (part.includes('-')) {
+                    const [start, end] = part.split('-').map(Number);
+                    if (start > 0 && end <= totalPages && start <= end) {
+                        for (let i = start - 1; i < end; i++) {
+                            ranges.push(i);
+                        }
+                    }
+                } else {
+                    const page = Number(part);
+                    if (page > 0 && page <= totalPages) {
+                        ranges.push(page - 1);
+                    }
+                }
+            });
+            // Return unique sorted indices
+            return [...new Set(ranges)].sort((a, b) => a - b);
+        }
+
+        // --- Image to Text Tool Logic ---
+        const ocrImageInput = document.getElementById('ocr-image-input');
+        const convertToTextBtn = document.getElementById('convert-to-text-btn');
+        const ocrStatus = document.getElementById('ocr-status');
+        const extractedTextOutput = document.getElementById('extracted-text-output');
+
+        convertToTextBtn.addEventListener('click', async () => {
+            const file = ocrImageInput.files[0];
+            if (!file) {
+                ocrStatus.textContent = 'Please upload an image first.';
+                return;
+            }
+
+            ocrStatus.textContent = 'Extracting text... This may take a moment.';
+            extractedTextOutput.value = '';
+
+            try {
+                const worker = await Tesseract.createWorker('eng');
+                const { data: { text } } = await worker.recognize(file);
+                extractedTextOutput.value = text;
+                ocrStatus.textContent = 'Text extracted successfully!';
+                await worker.terminate();
+            } catch (error) {
+                ocrStatus.textContent = `Error: Could not extract text. ${error.message}`;
+                console.error(error);
+            }
+        });
+
+        // --- Image to PDF Tool Logic ---
+        const { jsPDF } = window.jspdf;
+        const pdfImageInput = document.getElementById('pdf-image-input');
+        const convertToPdfBtn = document.getElementById('convert-to-pdf-btn');
+        const pdfImageStatus = document.getElementById('pdf-image-status');
+
+        convertToPdfBtn.addEventListener('click', async () => {
+            const files = pdfImageInput.files;
+            if (files.length === 0) {
+                pdfImageStatus.textContent = 'Please select at least one image to convert.';
+                return;
+            }
+
+            pdfImageStatus.textContent = 'Converting images to PDF...';
+
+            try {
+                const doc = new jsPDF();
+                
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    const reader = new FileReader();
+
+                    await new Promise(resolve => {
+                        reader.onload = (event) => {
+                            const img = new Image();
+                            img.onload = () => {
+                                // Add a new page for each image after the first one
+                                if (i > 0) {
+                                    doc.addPage();
+                                }
+                                
+                                const imgWidth = img.width;
+                                const imgHeight = img.height;
+                                const pageWidth = doc.internal.pageSize.getWidth();
+                                const pageHeight = doc.internal.pageSize.getHeight();
+
+                                // Calculate the dimensions to fit the page while maintaining aspect ratio
+                                const ratio = Math.min(pageWidth / imgWidth, pageHeight / imgHeight);
+                                const newWidth = imgWidth * ratio;
+                                const newHeight = imgHeight * ratio;
+
+                                doc.addImage(img, 'JPEG', (pageWidth - newWidth) / 2, (pageHeight - newHeight) / 2, newWidth, newHeight);
+                                resolve();
+                            };
+                            img.src = event.target.result;
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                }
+                
+                doc.save('converted.pdf');
+                pdfImageStatus.textContent = 'Images converted to PDF successfully! Download started.';
+            } catch (error) {
+                pdfImageStatus.textContent = `Error converting images to PDF: ${error.message}`;
+                console.error(error);
+            }
+        });
+    </script>
+
+</body>
+</html>
